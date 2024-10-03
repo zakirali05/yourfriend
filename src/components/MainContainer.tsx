@@ -3,7 +3,7 @@ import { getRandomAyat } from "@/utils/getRandomAyat";
 import { useState } from "react";
 
 const MainContainer = () => {
-  const [ayat, setAyat] = useState<any>();
+  const [ayat, setAyat] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const getAyat = async () => {
     try {
