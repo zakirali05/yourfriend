@@ -11,8 +11,8 @@ const MainContainer = () => {
       const ayat = await getRandomAyat();
       console.log(ayat);
       setAyat(ayat);
-    } catch (err) {
-      alert("Something went wrong!");
+    } catch (err: any) {
+      alert(`Something went wrong! ${err.message}`);
     } finally {
       setLoading(false);
     }
