@@ -60,7 +60,7 @@ const MainContainer = ({
       >
         Change BG
       </button>
-      <div className="p-4   backdrop:blur-sm z-[1000] rounded-md shadow-lg w-[600px]  h-[calc(100vh-100px)] md:h-[480px]  mt-16 flex flex-col">
+      <div className="p-4   backdrop:blur-sm z-[1000] rounded-md shadow-lg w-[600px]  h-[calc(100vh-130px)] md:h-[480px]  mt-16 flex flex-col">
         <div
           style={{ color: TEXT_COLOUR }}
           className={cn(
