@@ -71,7 +71,7 @@ const MainContainer = ({
             {ayat?.surahName} - [{ayat?.surahNameTranslation}]
           </p>
           <p className="text-center">
-            ({ayat?.ayahNo}:{ayat?.surahNo})
+            ({ayat?.surahNo}:{ayat?.ayahNo})
           </p>
           <h1 className="my-3 font-bold text-3xl text-right">
             {ayat?.arabic1}
