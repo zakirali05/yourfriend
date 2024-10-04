@@ -1,9 +1,10 @@
 "use client";
+import { INITIAL_AYAH } from "@/constants";
 import { getRandomAyat } from "@/utils/getRandomAyat";
 import { useState } from "react";
 
 const MainContainer = () => {
-  const [ayat, setAyat] = useState<any>(null);
+  const [ayat, setAyat] = useState<any>(INITIAL_AYAH);
   const [loading, setLoading] = useState(false);
   const getAyat = async () => {
     try {
@@ -21,12 +22,22 @@ const MainContainer = () => {
     <div className="p-4 bg-slate-900 rounded-md shadow-lg w-[600px] min-h-[400px] mt-16 flex flex-col">
       <div className="flex flex-col gap-2">
         <p className="text-center">
-          {ayat?.surahName} ( {ayat?.ayahNo}:{ayat?.surahNo})
+          {ayat?.surahName} - [{ayat?.surahNameTranslation}]
+        </p>
+        <p className="text-center">
+          ({ayat?.ayahNo}:{ayat?.surahNo})
         </p>
         <h1 className="my-3 font-bold text-2xl text-right">{ayat?.arabic1}</h1>
         <p className="text-center">{ayat?.english}</p>
       </div>
-      <div className="flex items-center justify-center w-full mt-auto ">
+
+      <div className="flex flex-col gap-4 items-center justify-center w-full mt-auto ">
+        <audio
+          src={ayat?.audio["1"]?.url}
+          typeof="audio/mp3"
+          controls
+          className="w-full"
+        />
         <button
           disabled={loading}
           onClick={getAyat}
