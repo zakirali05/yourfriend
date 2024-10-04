@@ -1,21 +1,34 @@
 "use client";
 import { INITIAL_AYAH } from "@/constants";
 import { getRandomAyat } from "@/utils/getRandomAyat";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   BUTTON_COLORS_ACCORDING_TO_VIDEO,
   TEXT_COLOR_ACCORDING_TO_VIDEO,
 } from "@/constants";
-import { useRouter } from "next/navigation";
 import { cn } from "@/utils/cn";
 
-const MainContainer = ({ random_video }: { random_video: number }) => {
+const MainContainer = ({
+  random_video,
+  set_random_video,
+}: {
+  random_video: number;
+  set_random_video: any;
+}) => {
   const [ayat, setAyat] = useState<any>(INITIAL_AYAH);
   const [loading, setLoading] = useState(false);
-  const TEXT_COLOUR = TEXT_COLOR_ACCORDING_TO_VIDEO[random_video - 1];
-  const BG_COLOUR = BUTTON_COLORS_ACCORDING_TO_VIDEO[random_video - 1];
-  console.log(TEXT_COLOUR, BG_COLOUR);
-  const router = useRouter();
+  const [TEXT_COLOUR, SET_TEXT_COLOUR] = useState("");
+  const [BG_COLOUR, SET_BG_COLOUR] = useState("");
+
+  useEffect(() => {
+    const TEXT_COLOUR = TEXT_COLOR_ACCORDING_TO_VIDEO[random_video - 1];
+    const BG_COLOUR = BUTTON_COLORS_ACCORDING_TO_VIDEO[random_video - 1];
+
+    SET_TEXT_COLOUR(TEXT_COLOUR);
+    SET_BG_COLOUR(BG_COLOUR);
+  }, [random_video]);
+
+  console.log("from maincontianer client", TEXT_COLOUR, BG_COLOUR);
   const getAyat = async () => {
     try {
       setLoading(true);
@@ -31,20 +44,24 @@ const MainContainer = ({ random_video }: { random_video: number }) => {
   return (
     <>
       <button
+        style={{ background: BG_COLOUR.split("-")[1] }}
         disabled={loading}
-        onClick={() => router.refresh()}
+        onClick={() => {
+          const RANDOM_VIDEO = Math.floor(Math.random() * 8) + 1;
+          set_random_video(RANDOM_VIDEO);
+        }}
         className={cn(
-          ` absolute top-3 right-3 text-xs rounded-md shadow-lg   p-2 
-          disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70 z-[1000]`,
+          "absolute top-3 right-3 text-xs rounded-md shadow-xl  p-2  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70 z-[1000]",
           BG_COLOUR
         )}
       >
         Change BG
       </button>
-      <div className="p-4   backdrop:blur-sm z-[1000] rounded-md shadow-lg w-[600px] h-[480px]  mt-16 flex flex-col">
+      <div className="p-4   backdrop:blur-sm z-[1000] rounded-md shadow-lg w-[600px]  h-[calc(100vh-70px)] md:h-[480px]  mt-16 flex flex-col">
         <div
+          style={{ color: TEXT_COLOUR.split("-")[1] }}
           className={cn(
-            `flex  flex-col gap-2 max-h-[300px]   p-1 overflow-y-scroll font-bold`,
+            "flex  flex-col gap-2  h-full md:max-h-[300px]   p-1 overflow-y-scroll font-bold",
             TEXT_COLOUR
           )}
         >
@@ -70,9 +87,10 @@ const MainContainer = ({ random_video }: { random_video: number }) => {
 
           <button
             disabled={loading}
+            style={{ background: BG_COLOUR.split("-")[1] }}
             onClick={getAyat}
             className={cn(
-              `rounded-md shadow-lg  w-full p-3  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70`,
+              "rounded-md shadow-xl  w-full p-3  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70",
               BG_COLOUR
             )}
           >
