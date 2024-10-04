@@ -17,8 +17,12 @@ const MainContainer = ({
 }) => {
   const [ayat, setAyat] = useState<any>(INITIAL_AYAH);
   const [loading, setLoading] = useState(false);
-  const [TEXT_COLOUR, SET_TEXT_COLOUR] = useState("");
-  const [BG_COLOUR, SET_BG_COLOUR] = useState("");
+  const [TEXT_COLOUR, SET_TEXT_COLOUR] = useState(
+    TEXT_COLOR_ACCORDING_TO_VIDEO[random_video - 1]
+  );
+  const [BG_COLOUR, SET_BG_COLOUR] = useState(
+    BUTTON_COLORS_ACCORDING_TO_VIDEO[random_video - 1]
+  );
 
   useEffect(() => {
     const TEXT_COLOUR = TEXT_COLOR_ACCORDING_TO_VIDEO[random_video - 1];
@@ -44,25 +48,23 @@ const MainContainer = ({
   return (
     <>
       <button
-        style={{ background: BG_COLOUR.split("-")[1] }}
+        style={{ background: BG_COLOUR }}
         disabled={loading}
         onClick={() => {
           const RANDOM_VIDEO = Math.floor(Math.random() * 8) + 1;
           set_random_video(RANDOM_VIDEO);
         }}
         className={cn(
-          "absolute top-3 right-3 text-xs rounded-md shadow-xl  p-2  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70 z-[1000]",
-          BG_COLOUR
+          "absolute top-3 right-3 text-xs rounded-md shadow-xl  p-2  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70 z-[1000]"
         )}
       >
         Change BG
       </button>
       <div className="p-4   backdrop:blur-sm z-[1000] rounded-md shadow-lg w-[600px]  h-[calc(100vh-70px)] md:h-[480px]  mt-16 flex flex-col">
         <div
-          style={{ color: TEXT_COLOUR.split("-")[1] }}
+          style={{ color: TEXT_COLOUR }}
           className={cn(
-            "flex  flex-col gap-2  h-full md:max-h-[300px]   p-1 overflow-y-scroll font-bold",
-            TEXT_COLOUR
+            "flex  flex-col gap-2  h-full md:max-h-[300px]   p-1 overflow-y-scroll font-bold"
           )}
         >
           <p className="text-center">
@@ -87,11 +89,10 @@ const MainContainer = ({
 
           <button
             disabled={loading}
-            style={{ background: BG_COLOUR.split("-")[1] }}
+            style={{ background: BG_COLOUR }}
             onClick={getAyat}
             className={cn(
-              "rounded-md shadow-xl  w-full p-3  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70",
-              BG_COLOUR
+              "rounded-md shadow-xl  w-full p-3  disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70"
             )}
           >
             {loading ? "Loading..." : "Talk to me my lord 😊"}
