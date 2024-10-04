@@ -19,8 +19,8 @@ const MainContainer = () => {
     }
   };
   return (
-    <div className="p-4 bg-slate-900 rounded-md shadow-lg w-[600px] min-h-[400px] mt-16 flex flex-col">
-      <div className="flex flex-col gap-2">
+    <div className="p-4  backdrop:blur-md z-[1000] rounded-md shadow-lg w-[600px] min-h-[450px] max-h-[500px] mt-16 flex flex-col">
+      <div className="flex flex-col gap-2 max-h-[300px] p-1 overflow-y-scroll">
         <p className="text-center">
           {ayat?.surahName} - [{ayat?.surahNameTranslation}]
         </p>
@@ -36,12 +36,13 @@ const MainContainer = () => {
           src={ayat?.audio["1"]?.url}
           typeof="audio/mp3"
           controls
-          className="w-full"
+          className="w-full "
         />
+
         <button
           disabled={loading}
           onClick={getAyat}
-          className="rounded-md w-full p-3 bg-zinc-800 disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70"
+          className="rounded-md w-full p-3 bg-purple-800 disabled:cursor-not-allowed hover:opacity-70 disabled:opacity-70"
         >
           {loading ? "Loading..." : "Talk to me my lord 😊"}
         </button>

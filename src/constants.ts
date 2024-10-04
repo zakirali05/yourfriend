@@ -22,3 +22,5 @@ export const INITIAL_AYAH = {
         }
     }
 }
+
+export const ARRAY_OF_VIDEOS = ["/universe1.mp4", "/universe2.mp4", "/universe3.mp4", "/universe4.mp4", "/universe5.mp4", "/universe6.mp4", "/universe7.mp4", "/universe8.mp4"]
